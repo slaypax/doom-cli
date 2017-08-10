@@ -1,6 +1,0 @@
-doom_cli.egg-info/PKG-INFO
-doom_cli.egg-info/SOURCES.txt
-doom_cli.egg-info/dependency_links.txt
-doom_cli.egg-info/entry_points.txt
-doom_cli.egg-info/requires.txt
-doom_cli.egg-info/top_level.txt
