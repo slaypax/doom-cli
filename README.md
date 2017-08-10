@@ -6,6 +6,7 @@ Doom-Cli is a command line interface wrapped around the fantastic [RESTful-Doom 
 
 Install the tool in virtualenv
 
+`code()`
  $ git clone github.com/slaypax/doom-cli.git
  $ python3 -m venv doom-cli
  $ cd doom-cli
