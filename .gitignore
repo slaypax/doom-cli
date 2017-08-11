@@ -7,6 +7,7 @@ pip-selfcheck.json
 lib
 bin
 .vscode
+pyvenv.cfg
 #
 # C extensions
 *.so
