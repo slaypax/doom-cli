@@ -42,7 +42,9 @@ def get_world():
 
 @cli.command(short_help="open doors and stuff like doors")
 def door():
-
+    '''
+    Opens doors. Doesn't open switches yet. I don't know how they work, and I don't know if they are implemented in the API. 
+    '''
     url = d_server + "/api/world/doors"
     doors = requests.request("get", url)
     nearest_door = [d for d in doors.json() if d['distance'] <= 200]
