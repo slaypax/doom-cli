@@ -31,6 +31,25 @@ def get_player():
     response = requests.request("get", url)
     print(response.json())
 
+@cli.command(short_help="Move with W A S D")
+@click.argument("direction")
+def move(direction):
+    '''
+    pass direction you want to move as argument
+    '''
+    url = d_server + "/api/player/actions"
+    keys = {
+        "w": "forward",
+        "s": "backward",
+        "a": "turn-left",
+        "d": "turn-right"
+    }
+    arrow = keys.get(direction, "no-dice")
+    
+    payload = "{\"type\": \"" + arrow + "\"}"
+    response = requests.request("POST", url, data=payload)
+    print(response.json())
+
 @cli.command(short_help="Fire the selected Weapon")
 def shoot():
     '''
@@ -105,16 +124,3 @@ def spawn_monster(monster):
     monster_id = monster_state['id']
     print(monster)
     print(monster_id)
-
-
-#Moving doesn't really work yet. I can't figure out why I can't update player position. 
-#@cli.command()
-#def move():
-#    url = d_server + "/api/player"
-#    request_player = requests.request("get", url)
-#    player_state = request_player.json()
-#    x_current = player_state["position"]["x"]
-#    x_new = str(int(round(x_current + 10)))
-#    payload = "{'position': {'x': 90.279648, 'y': 750.198547, 'z': 160}}"
-#    response = requests.request("PATCH", url)
-#    print(response.json())
