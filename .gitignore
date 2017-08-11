@@ -2,7 +2,12 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+#
+pip-selfcheck.json
+lib
+bin
+.vscode
+#
 # C extensions
 *.so
 

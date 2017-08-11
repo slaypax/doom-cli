@@ -92,6 +92,11 @@ def spawn_monster(monster):
     - DEMON\n
     - LOST SOUL\n
     - CYBER-DEMON\n
+
+    You can use this command to spawn any object, check this list of object descriptions
+    in the API:
+    
+     https://github.com/jeff-1amstudios/restful-doom/blob/master/src/doom/api_obj_descriptions.c
     '''
     url = d_server + "/api/world/objects"
     payload = "{\"distance\": 400,\"angle\": 90,\"type\":" + "\"" + monster.upper() + "\"" + "}"
