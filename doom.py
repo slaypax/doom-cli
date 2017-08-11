@@ -31,6 +31,32 @@ def get_player():
     response = requests.request("get", url)
     print(response.json())
 
+@cli.command(short_help="Retrive the state of objects near doom guy")
+def get_world():
+    '''
+    Retreive state data on the player character.
+    '''
+    url = d_server + "/api/world/objects"
+    response = requests.request("get", url)
+    print(response.json())
+
+@cli.command(short_help="open doors and stuff like doors")
+def door():
+
+    url = d_server + "/api/world/doors"
+    doors = requests.request("get", url)
+    nearest_door = [d for d in doors.json() if d['distance'] <= 200]
+    if nearest_door == []:
+        print("no doors to open...")
+    elif nearest_door[0]['state'] == 'closed':
+        url = d_server + "/api/world/doors/" + str(nearest_door[0]['id'])
+        payload = "{\"state\":\"open\"}"
+        door_open = requests.request("patch", url, data=payload)
+    else:
+        url = d_server + "/api/world/doors/" + str(nearest_door[0]['id'])
+        payload = "{\"state\":\"closed\"}"
+        door_open = requests.request("patch", url, data=payload)
+
 @cli.command(short_help="Move with W A S D")
 @click.argument("direction")
 def move(direction):
@@ -38,17 +64,12 @@ def move(direction):
     pass direction you want to move as argument
     '''
     url = d_server + "/api/player/actions"
-    keys = {
-        "w": "forward",
-        "s": "backward",
-        "a": "turn-left",
-        "d": "turn-right"
-    }
+    keys = {"w": "forward", "s": "backward", "a": "turn-left","d": "turn-right"}
     arrow = keys.get(direction, "no-dice")
     
     payload = "{\"type\": \"" + arrow + "\"}"
     response = requests.request("POST", url, data=payload)
-    print(response.json())
+    print(response)
 
 @cli.command(short_help="Fire the selected Weapon")
 def shoot():
